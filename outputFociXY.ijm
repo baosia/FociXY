@@ -10,7 +10,8 @@ for (i=1; i<=nImages(); i++) {
 			for (j = 0; j < n; j++) {
     			roiManager('select', j);
     			// process roi here
-    			run("Find Maxima...", "prominence=10 output=[List]");
+    			//Change prominence value as needed
+			run("Find Maxima...", "prominence=10 output=[List]");
     			//Below adds an "ROI" row to the results output
     			IJ.renameResults("Results");
     			for (row=0; row<nResults; row++) {
@@ -18,7 +19,8 @@ for (i=1; i<=nImages(); i++) {
     			}
     			//Send results to an excel file (requires read and write excel plugin)
     			selectWindow("Results");
-    			run("Read and Write Excel", "file=[C:/Users/bosia/OneDrive - City of Hope National Medical Center/Documents/Fiji Excel Files/fociXY.xlsx] sheet=Green");
+    			//specify path to your excel sheet destination
+			run("Read and Write Excel", "file=[C:/Users/"USER"/Documents/fociXY.xlsx] sheet=Green");
 			} 
     }   
     	else {
@@ -28,13 +30,15 @@ for (i=1; i<=nImages(); i++) {
     		m = roiManager('count');
 				for (k = 0; k < m; k++) {
     				roiManager('select', k);
-    				run("Find Maxima...", "prominence=20 output=[List]");
+    				//Change prominence value as needed
+				run("Find Maxima...", "prominence=20 output=[List]");
     				IJ.renameResults("Results");
     				for (row=0; row<nResults; row++) {
     					setResult("ROI", row, k);
     				}
     				selectWindow("Results");
-    				run("Read and Write Excel", "file=[C:/Users/bosia/OneDrive - City of Hope National Medical Center/Documents/Fiji Excel Files/fociXY.xlsx] sheet=Red");
+				//Specify same path as above (will write results to a second sheet)
+    				run("Read and Write Excel", "file=[C:/Users/"USER"/Documents/fociXY.xlsx] sheet=Red");
 				}
     		}
 	 }
